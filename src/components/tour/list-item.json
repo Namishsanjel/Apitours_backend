@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_tour_list_items",
+  "info": {
+    "displayName": "list-item",
+    "icon": "list"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_tour_itinerary_days",
+  "info": {
+    "displayName": "itinerary-day",
+    "icon": "calendar"
+  },
+  "options": {},
+  "attributes": {
+    "day": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

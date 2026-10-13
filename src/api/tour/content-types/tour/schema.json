@@ -1,0 +1,112 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tours",
+  "info": {
+    "singularName": "tour",
+    "pluralName": "tours",
+    "displayName": "Tour"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "coverImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "overview": {
+      "type": "text"
+    },
+    "difficulty": {
+      "type": "enumeration",
+      "enum": [
+        "easy",
+        "moderate",
+        "tough"
+      ]
+    },
+    "travelType": {
+      "type": "enumeration",
+      "enum": [
+        "trekking",
+        "culture",
+        "family",
+        "adventure"
+      ]
+    },
+    "durationDays": {
+      "type": "integer"
+    },
+    "groupSize": {
+      "type": "string"
+    },
+    "distanceKm": {
+      "type": "decimal"
+    },
+    "priceAmount": {
+      "type": "decimal"
+    },
+    "priceCurrency": {
+      "type": "string",
+      "default": "USD"
+    },
+    "pricePer": {
+      "type": "string",
+      "default": "Per Person"
+    },
+    "startLocation": {
+      "type": "string"
+    },
+    "endLocation": {
+      "type": "string"
+    },
+    "itinerary": {
+      "type": "component",
+      "repeatable": true,
+      "component": "tour.itinerary-day"
+    },
+    "inclusions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "tour.list-item"
+    },
+    "exclusions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "tour.list-item"
+    },
+    "destination": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::destination.destination",
+      "inversedBy": "tours"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "order": {
+      "type": "integer"
+    }
+  }
+}

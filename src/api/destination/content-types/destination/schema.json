@@ -1,0 +1,71 @@
+{
+  "kind": "collectionType",
+  "collectionName": "destinations",
+  "info": {
+    "singularName": "destination",
+    "pluralName": "destinations",
+    "displayName": "Destination"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "shortDescription": {
+      "type": "text"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "tours": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tour.tour",
+      "mappedBy": "destination"
+    },
+    "continent": {
+      "type": "enumeration",
+      "enum": [
+        "asia",
+        "europe",
+        "africa",
+        "oceania",
+        "south_america"
+      ]
+    },
+    "attractions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "tour.list-item"
+    },
+    "activities": {
+      "type": "component",
+      "repeatable": true,
+      "component": "tour.list-item"
+    },
+    "bestTime": {
+      "type": "component",
+      "repeatable": true,
+      "component": "tour.list-item"
+    },
+    "order": {
+      "type": "integer"
+    }
+  }
+}

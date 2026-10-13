@@ -1,0 +1,142 @@
+{
+  "kind": "collectionType",
+  "collectionName": "trip_requests",
+  "info": {
+    "singularName": "trip-request",
+    "pluralName": "trip-requests",
+    "displayName": "Trip Request"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "serviceType": {
+      "type": "enumeration",
+      "enum": [
+        "flight",
+        "holiday_package",
+        "helicopter",
+        "car_rental",
+        "visa",
+        "hotel"
+      ],
+      "required": true
+    },
+    "fullName": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true,
+      "maxLength": 30
+    },
+    "message": {
+      "type": "text",
+      "maxLength": 2000
+    },
+    "fromLocation": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "toLocation": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "departureDate": {
+      "type": "date"
+    },
+    "returnDate": {
+      "type": "date"
+    },
+    "tripType": {
+      "type": "enumeration",
+      "enum": [
+        "one_way",
+        "round_trip"
+      ]
+    },
+    "adults": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 50,
+      "default": 1
+    },
+    "children": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 50,
+      "default": 0
+    },
+    "infants": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 20,
+      "default": 0
+    },
+    "rooms": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 20
+    },
+    "packageType": {
+      "type": "enumeration",
+      "enum": [
+        "domestic",
+        "international",
+        "fixed_departure",
+        "family",
+        "honeymoon",
+        "group",
+        "adventure",
+        "pilgrimage",
+        "festival"
+      ]
+    },
+    "helicopterTour": {
+      "type": "enumeration",
+      "enum": [
+        "everest_helicopter",
+        "heli_sightseeing"
+      ]
+    },
+    "vehicleType": {
+      "type": "enumeration",
+      "enum": [
+        "airport_transfer",
+        "city_transfer",
+        "jeep",
+        "hiace",
+        "bus",
+        "private_car_with_driver"
+      ]
+    },
+    "visaService": {
+      "type": "enumeration",
+      "enum": [
+        "tourist_visa",
+        "visa_documentation",
+        "travel_insurance"
+      ]
+    },
+    "nationality": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "new",
+        "contacted",
+        "closed"
+      ],
+      "default": "new"
+    }
+  }
+}
