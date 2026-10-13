@@ -29,6 +29,15 @@
     },
     "travelDate": {
       "type": "date"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "new",
+        "contacted",
+        "closed"
+      ],
+      "default": "new"
     }
   }
 }

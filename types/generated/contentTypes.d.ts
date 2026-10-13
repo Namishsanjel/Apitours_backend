@@ -472,6 +472,8 @@ export interface ApiContactSubmissionContactSubmission
       }>;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    status: Schema.Attribute.Enumeration<['new', 'contacted', 'closed']> &
+      Schema.Attribute.DefaultTo<'new'>;
     tour: Schema.Attribute.String;
     travelDate: Schema.Attribute.Date;
     updatedAt: Schema.Attribute.DateTime;
@@ -785,26 +787,22 @@ export interface ApiTripRequestTripRequest extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    adults: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
-    children: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    budget: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    departureDate: Schema.Attribute.Date;
+    destination: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
     email: Schema.Attribute.Email & Schema.Attribute.Required;
-    fromLocation: Schema.Attribute.String &
+    group: Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
-        maxLength: 120;
+        maxLength: 60;
       }>;
-    fullName: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 120;
-      }>;
-    helicopterTour: Schema.Attribute.Enumeration<
-      ['everest_helicopter', 'heli_sightseeing']
-    >;
-    infants: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -815,58 +813,22 @@ export interface ApiTripRequestTripRequest extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 2000;
       }>;
-    nationality: Schema.Attribute.String &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 80;
-      }>;
-    packageType: Schema.Attribute.Enumeration<
-      [
-        'domestic',
-        'international',
-        'fixed_departure',
-        'family',
-        'honeymoon',
-        'group',
-        'adventure',
-        'pilgrimage',
-        'festival',
-      ]
-    >;
-    phone: Schema.Attribute.String &
+    name: Schema.Attribute.String &
       Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 30;
-      }>;
-    publishedAt: Schema.Attribute.DateTime;
-    returnDate: Schema.Attribute.Date;
-    rooms: Schema.Attribute.Integer;
-    serviceType: Schema.Attribute.Enumeration<
-      ['flight', 'holiday_package', 'helicopter', 'car_rental', 'visa', 'hotel']
-    > &
-      Schema.Attribute.Required;
-    status: Schema.Attribute.Enumeration<['new', 'contacted', 'closed']> &
-      Schema.Attribute.DefaultTo<'new'>;
-    toLocation: Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 120;
       }>;
-    tripType: Schema.Attribute.Enumeration<['one_way', 'round_trip']>;
+    preferences: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    status: Schema.Attribute.Enumeration<['new', 'contacted', 'closed']> &
+      Schema.Attribute.DefaultTo<'new'>;
+    travelDate: Schema.Attribute.Date;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    vehicleType: Schema.Attribute.Enumeration<
-      [
-        'airport_transfer',
-        'city_transfer',
-        'jeep',
-        'hiace',
-        'bus',
-        'private_car_with_driver',
-      ]
-    >;
-    visaService: Schema.Attribute.Enumeration<
-      ['tourist_visa', 'visa_documentation', 'travel_insurance']
-    >;
   };
 }
 

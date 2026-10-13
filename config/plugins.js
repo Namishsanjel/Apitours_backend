@@ -21,21 +21,52 @@ const deniedTypes = [
   'application/x-mach-binary',
 ];
 
-module.exports = () => ({
-  'users-permissions': {
-    config: {
-      jwtManagement: 'refresh',
-      sessions: {
-        httpOnly: true,
+module.exports = () => {
+  // SMTP settings are read from the environment only. Never hard-code
+  // credentials here. See .env.example for the full list of variables.
+  const smtpPort = Number.parseInt(process.env.SMTP_PORT, 10);
+  const hasValidPort = !Number.isNaN(smtpPort);
+  const hasCredentials = Boolean(process.env.SMTP_USERNAME && process.env.SMTP_PASSWORD);
+
+  return {
+    'users-permissions': {
+      config: {
+        jwtManagement: 'refresh',
+        sessions: {
+          httpOnly: true,
+        },
       },
     },
-  },
-  upload: {
-    config: {
-      security: {
-        allowedTypes: allowedMediaTypes,
-        deniedTypes,
+    upload: {
+      config: {
+        security: {
+          allowedTypes: allowedMediaTypes,
+          deniedTypes,
+        },
       },
     },
-  },
-});
+    email: {
+      config: {
+        provider: 'nodemailer',
+        providerOptions: {
+          host: process.env.SMTP_HOST,
+          port: hasValidPort ? smtpPort : undefined,
+          // Implicit TLS only on the standard submission-over-TLS port.
+          secure: hasValidPort && smtpPort === 465,
+          ...(hasCredentials
+            ? {
+                auth: {
+                  user: process.env.SMTP_USERNAME,
+                  pass: process.env.SMTP_PASSWORD,
+                },
+              }
+            : {}),
+        },
+        settings: {
+          defaultFrom: process.env.EMAIL_FROM,
+          defaultReplyTo: process.env.EMAIL_REPLY_TO || process.env.EMAIL_FROM,
+        },
+      },
+    },
+  };
+};
